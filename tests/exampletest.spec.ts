@@ -13,7 +13,7 @@ test.describe('Events widget', () => {
     await expect(codeBlock).toContainText('turquoise');
 
     //Проверяем, что ввод текста в iframe заблокирован
-    await expect(codeBlock).toBeDisabled
+    await expect(codeBlock).toBeDisabled();
   });
 });
 
