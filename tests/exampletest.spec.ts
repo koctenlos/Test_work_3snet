@@ -41,3 +41,24 @@ test('change color', async ({ page }) => {
     await colorbutton.click();
     await expect(codeBlock).toContainText('purple');
 });
+
+// создание календаря
+test('create calendar', async ({ page }) => {
+    // Открываем страницу
+    await page.goto('https://dev.3snet.info/eventswidget/');
+
+  await page.locator('.checkselect-over').first().click();
+  await page.getByText('Affiliate').click();
+  await page.locator('.checkselect-over').first().click();
+  await page.locator('div:nth-child(2) > .input-item > .checkselect > .checkselect-control > .checkselect-over').click();
+  await page.getByText('Выбрать все').nth(1).click();
+  await page.locator('.checkselect-control.active > .checkselect-over').click();
+  await page.locator('.radio__square').first().click();
+  await page.locator('div:nth-child(2) > .radio > .radio__square').first().click();
+  await page.locator('label:nth-child(3) > .radio__square').first().click();
+  await page.getByRole('button', { name: 'Сгенерировать превью' }).click();
+  const previewframe=page.frameLocator('#3snet-frame');
+  await expect(previewframe.getByText('Название события')).toBeVisible();
+  await expect(previewframe.getByText('Дата проведения' )).toBeVisible();
+  await expect(previewframe.getByText('Страны проведения')).toBeVisible();
+});
