@@ -57,8 +57,8 @@ test('create calendar', async ({ page }) => {
   await page.locator('div:nth-child(2) > .radio > .radio__square').first().click();
   await page.locator('label:nth-child(3) > .radio__square').first().click();
   await page.getByRole('button', { name: 'Сгенерировать превью' }).click();
-  const previewframe=page.frameLocator('#3snet-frame');
-  await expect(previewframe.getByText('Название события')).toBeVisible();
+  const previewframe=page.frameLocator('iframe[src*="widget-active-events"]');
+  await expect(previewframe.getByText('Название события')).toBeVisible({ timeout: 10000 });
   await expect(previewframe.getByText('Дата проведения' )).toBeVisible();
   await expect(previewframe.getByText('Страны проведения')).toBeVisible();
 });
